@@ -3,12 +3,12 @@ import json
 from jwt_encoder import sign_with_hs256
 
 
-def signature_is_valid(header, payload, signature):
+def signature_is_valid(header: dict, payload: dict, signature: bytes, secret: str) -> bool:
     is_valid = False
     try:
         algorithm = _get_algo(header)
         if algorithm is 'HS256':
-            expected_signature = sign_with_hs256(header, payload, 'secret')
+            expected_signature = sign_with_hs256(header, payload, secret)
             is_valid = expected_signature.equals(signature)
     except:
         pass
