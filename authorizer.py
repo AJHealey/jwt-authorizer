@@ -4,7 +4,7 @@ from jwt_decoder import decode_token
 from jwt_validator import signature_is_valid
 
 
-def authorizer(event: dict, context, callback: staticmethod) -> None:
+def authorizer(event: dict, context: dict, callback: staticmethod) -> None:
     secret = os.getenv('SECRET', "")
     token = event['authorizationToken']
     header, payload, signature = decode_token(token)
